@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/DataProcess.cpp
+climits
+-
+stack
+-
+DataProcess.h
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/DataProcess.h
+
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/DataProcess.h
+string
+-
+
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/VirtualMachine.cpp
+iostream
+-
+fstream
+-
+cstring
+-
+VirtualMachine.h
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/VirtualMachine.h
+DataProcess.h
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/DataProcess.h
+
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/VirtualMachine.h
+string
+-
+stack
+-
+
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/main.cpp
+VirtualMachine.h
+/cygdrive/d/Project/C/temp/2020-SRE-Assessment/YangZhenyv/VirtualMachine.h
+
