@@ -1,0 +1,18 @@
+    PSH 17
+    PSH -89
+    ADD
+    POP
+    PSH 7
+    PSH 8
+    MUL
+    POP
+    SET 11 21
+    PSH 23
+    PSH 3
+    MOD
+    POP
+    PSH 1
+    PSH 0
+    XOR
+    POP
+    HLT
