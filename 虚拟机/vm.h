@@ -28,21 +28,21 @@ enum {
 	_inst,
 	_out,
 };
-// ¼Ä´æÆ÷
+// å¯„å­˜å™¨
 class Instruction {
 public:
-	static const int const_hel = 1;  // ½áÊø
-	static const int const_put = 2;  // Êı¾İ´æ´¢
-	static const int const_mov = 3;  // Êı¾İ½»»»
-	static const int const_jum = 4;  // Ìø×ª
-	static const int const_plu = 5;  // ¼Ó
-	static const int const_min = 6;  // ¼õ
-	static const int const_mul = 7;  // ³Ë
-	static const int const_div = 8;  // ³ı
-	static const int const_xor = 9;  // °´Î»Òì»ò
-	static const int const_or = 10; // °´Î»»ò
-	static const int const_and = 11; // °´Î»Óë
-	static const int const_out = 12; // Êä³ö
+	static const int const_hel = 1;  // ç»“æŸ
+	static const int const_put = 2;  // æ•°æ®å­˜å‚¨
+	static const int const_mov = 3;  // æ•°æ®äº¤æ¢
+	static const int const_jum = 4;  // è·³è½¬
+	static const int const_plu = 5;  // åŠ 
+	static const int const_min = 6;  // å‡
+	static const int const_mul = 7;  // ä¹˜
+	static const int const_div = 8;  // é™¤
+	static const int const_xor = 9;  // æŒ‰ä½å¼‚æˆ–
+	static const int const_or = 10; // æŒ‰ä½æˆ–
+	static const int const_and = 11; // æŒ‰ä½ä¸
+	static const int const_out = 12; // è¾“å‡º
 private:
 	int m_address;
 	int r_address;
@@ -63,3 +63,4 @@ private:
 	int NewTempCopy(char *s);
 	void DelTempCopy(int i);
 };
+
