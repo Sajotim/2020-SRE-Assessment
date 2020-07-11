@@ -1,0 +1,17 @@
+main:
+    push 3
+    push 4
+    add
+    push 2
+    sub
+    jmp end
+
+no_exec:
+    push 7
+    mul
+
+end:
+    push 3
+    mul
+    top
+    hlt
