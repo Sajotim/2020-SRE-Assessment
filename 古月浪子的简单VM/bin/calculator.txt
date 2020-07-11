@@ -1,0 +1,102 @@
+	mov ax "[Titvt's simple calculator]\n"
+	out string
+	mov ax "Please input expression:\n"
+	out string
+start:
+	mov cx 3
+loop:
+	mov ax cx
+	mov bx 2
+	cmp ax bx
+	je symbol
+	in int
+	push ax
+	mov ax cx
+	mov bx -1
+	add ax bx
+	mov cx ax
+	jmp tail
+symbol:
+	mov ax 4
+	mem
+	in string
+	mov ax [ax]
+	push ax
+	mov ax cx
+	mov bx -1
+	add ax bx
+	mov cx ax
+tail:
+	jne loop
+	pop bx
+	pop ax
+	push bx
+	mov bx 43
+	cmp ax bx
+	je l_add
+	add ax bx
+	mov bx 45
+	cmp ax bx
+	je l_minus
+	add ax bx
+	mov bx 42
+	cmp ax bx
+	je l_multiply
+	add ax bx
+	mov bx 47
+	cmp ax bx
+	je l_divide
+	add ax bx
+	mov bx 37
+	cmp ax bx
+	je l_mod
+	jmp error
+l_add:
+	pop bx
+	pop ax
+	add ax bx
+	out int
+	jmp end
+l_minus:
+	pop bx
+	pop ax
+	cmp ax bx
+	out int
+	jmp end
+l_multiply:
+	pop bx
+	pop ax
+	mul ax bx
+	out int
+	jmp end
+l_divide:
+	pop bx
+	pop ax
+	div ax bx
+	out int
+	jmp end
+l_mod:
+	pop bx
+	pop ax
+	mod ax bx
+	out int
+end:
+	mov ax 10
+	out char
+	mov ax "Do you want another calculation? [y/n]\n"
+	out string
+	mov ax 4
+	mem
+	in string
+	mov ax [ax]
+	mov bx 121
+	cmp ax bx
+	je start
+	mov ax "Thanks for using~!"
+	out string
+	mov ax 0
+	exit
+error:
+	mov ax "Your expression is invalid!!! Try again >\n"
+	out string
+	jmp start
