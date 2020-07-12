@@ -1,0 +1,14 @@
+[Unit]
+Description = tunasync_worker %I
+After = network.service
+
+[Service]
+Type = simple
+User = root
+PIDFile = /run/multi-mirror-%i.pid
+PermissionsStartOnly = true
+ExecStart = /usr/bin/tunasync worker --config /etc/tunasync/worker-%i.conf --with-systemd
+ExecReload = /bin/kill -SIGHUP $MAINPID
+
+[Install]
+WantedBy = multi-user.target
