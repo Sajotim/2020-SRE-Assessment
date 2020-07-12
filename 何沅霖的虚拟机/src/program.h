@@ -1,0 +1,30 @@
+#include "VM_DEF.h"
+/*程序 */
+const int program[INT8_MAX] = {
+        PUT , D_OUT , _digit ,
+        PUT , D_OUT , _char ,
+        PUT , D_OUT , _digit ,
+        MOV , bxi , cxi ,
+        JEP , cxi , int('+') , 5 ,
+        ADD ,
+        JMP , 42 ,
+        JEP , cxi , int('-') , 5 ,
+        SUB ,
+        JMP , 35 ,
+        JEP , cxi , int('/') , 5 ,
+        DIV ,
+        JMP , 28 ,
+        JEP , cxi , int('*') , 5 ,
+        MUL ,
+        JMP , 21 ,
+        JEP , cxi , int('^') , 5 ,
+        XOR ,
+        JMP , 14 ,
+        JEP , cxi , int('|') , 5 ,
+        OR ,
+        JMP , 7 ,
+        JEP , cxi , int('&') , 6 ,
+        AND ,
+        OUT , axi , _digit,
+        HEL
+};

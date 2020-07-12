@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/YangZhenyv.dir/main.cpp.o CMakeFiles/YangZhenyv.dir/DataProcess.cpp.o CMakeFiles/YangZhenyv.dir/VirtualMachine.cpp.o  -o YangZhenyv.exe -Wl,--out-implib,libYangZhenyv.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
