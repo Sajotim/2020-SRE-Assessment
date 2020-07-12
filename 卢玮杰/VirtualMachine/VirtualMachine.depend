@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1594473638 source:c:\users\sgt.pepper\desktop\新建文件夹\virtualmachine\virtualmachine.cpp
-	<cstdio>
-	<cstdlib>
-	<cstring>
-	<iostream>
-
