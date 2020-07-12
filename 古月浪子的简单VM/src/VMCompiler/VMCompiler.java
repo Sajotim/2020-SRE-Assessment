@@ -61,90 +61,93 @@ public class VMCompiler {
                     opStream.write(0);
                     break;
                 case "push":
+                    opStream.write(1);
                     switch (next) {
                         case "ax":
-                            opStream.write(1);
+                            opStream.write(0);
                             break;
                         case "bx":
-                            opStream.write(2);
+                            opStream.write(1);
                             break;
                         case "cx":
-                            opStream.write(3);
+                            opStream.write(2);
                             break;
                         case "dx":
-                            opStream.write(4);
+                            opStream.write(3);
                             break;
                         case "sp":
-                            opStream.write(5);
+                            opStream.write(4);
                             break;
                         default:
-                            opStream.write(6);
+                            opStream.write(5);
                             opStream.write(toBytes(Integer.parseInt(next)), 0, 4);
                     }
                     i++;
                     break;
                 case "pop":
+                    opStream.write(2);
                     switch (next) {
                         case "ax":
-                            opStream.write(7);
+                            opStream.write(0);
                             break;
                         case "bx":
-                            opStream.write(8);
+                            opStream.write(1);
                             break;
                         case "cx":
-                            opStream.write(9);
+                            opStream.write(2);
                             break;
                         case "dx":
-                            opStream.write(10);
+                            opStream.write(3);
                             break;
                         case "sp":
-                            opStream.write(11);
+                            opStream.write(4);
                     }
                     i++;
                     break;
                 case "jmp":
-                    opStream.write(12);
+                    opStream.write(3);
                     labelsPlaceholder.put(opStream.size(), next);
                     opStream.write(new byte[4], 0, 4);
                     i++;
                     break;
                 case "je":
-                    opStream.write(13);
+                    opStream.write(4);
                     labelsPlaceholder.put(opStream.size(), next);
                     opStream.write(new byte[4], 0, 4);
                     i++;
                     break;
                 case "jne":
-                    opStream.write(14);
+                    opStream.write(5);
                     labelsPlaceholder.put(opStream.size(), next);
                     opStream.write(new byte[4], 0, 4);
                     i++;
                     break;
                 case "jg":
-                    opStream.write(15);
+                    opStream.write(6);
                     labelsPlaceholder.put(opStream.size(), next);
                     opStream.write(new byte[4], 0, 4);
                     i++;
                     break;
                 case "jge":
-                    opStream.write(16);
+                    opStream.write(7);
                     labelsPlaceholder.put(opStream.size(), next);
                     opStream.write(new byte[4], 0, 4);
                     i++;
                     break;
                 case "jl":
-                    opStream.write(17);
+                    opStream.write(8);
                     labelsPlaceholder.put(opStream.size(), next);
                     opStream.write(new byte[4], 0, 4);
                     i++;
                     break;
                 case "jle":
-                    opStream.write(18);
+                    opStream.write(9);
                     labelsPlaceholder.put(opStream.size(), next);
                     opStream.write(new byte[4], 0, 4);
                     i++;
                     break;
                 case "mov":
+                    opStream.write(10);
                     String text = i < list.size() - 2 ? list.get(i + 2) : null;
                     if (text != null && text.startsWith("\""))
                         text = text.substring(1, text.length() - 1) + '\0';
@@ -152,15 +155,88 @@ public class VMCompiler {
                         case "ax":
                             switch (third) {
                                 case "bx":
-                                    opStream.write(19);
+                                    opStream.write(0);
                                     break;
                                 case "cx":
-                                    opStream.write(20);
+                                    opStream.write(1);
                                     break;
                                 case "dx":
-                                    opStream.write(21);
+                                    opStream.write(2);
                                     break;
                                 case "[ax]":
+                                    opStream.write(3);
+                                    break;
+                                case "[bx]":
+                                    opStream.write(4);
+                                    break;
+                                case "[cx]":
+                                    opStream.write(5);
+                                    break;
+                                case "[dx]":
+                                    opStream.write(6);
+                                    break;
+                                default:
+                                    opStream.write(7);
+                                    if (third.startsWith("\"")) {
+                                        stringsPlaceholder.put(opStream.size(), text);
+                                        opStream.write(new byte[4], 0, 4);
+                                    } else
+                                        opStream.write(toBytes(Integer.parseInt(third)), 0, 4);
+                            }
+                            break;
+                        case "bx":
+                            switch (third) {
+                                case "ax":
+                                    opStream.write(8);
+                                    break;
+                                case "cx":
+                                    opStream.write(9);
+                                    break;
+                                case "dx":
+                                    opStream.write(10);
+                                    break;
+                                case "[ax]":
+                                    opStream.write(11);
+                                    break;
+                                case "[bx]":
+                                    opStream.write(12);
+                                    break;
+                                case "[cx]":
+                                    opStream.write(13);
+                                    break;
+                                case "[dx]":
+                                    opStream.write(14);
+                                    break;
+                                default:
+                                    opStream.write(15);
+                                    if (third.startsWith("\"")) {
+                                        stringsPlaceholder.put(opStream.size(), text);
+                                        opStream.write(new byte[4], 0, 4);
+                                    } else
+                                        opStream.write(toBytes(Integer.parseInt(third)), 0, 4);
+                            }
+                            break;
+                        case "cx":
+                            switch (third) {
+                                case "ax":
+                                    opStream.write(16);
+                                    break;
+                                case "bx":
+                                    opStream.write(17);
+                                    break;
+                                case "dx":
+                                    opStream.write(18);
+                                    break;
+                                case "[ax]":
+                                    opStream.write(19);
+                                    break;
+                                case "[bx]":
+                                    opStream.write(20);
+                                    break;
+                                case "[cx]":
+                                    opStream.write(21);
+                                    break;
+                                case "[dx]":
                                     opStream.write(22);
                                     break;
                                 default:
@@ -172,68 +248,31 @@ public class VMCompiler {
                                         opStream.write(toBytes(Integer.parseInt(third)), 0, 4);
                             }
                             break;
-                        case "bx":
+                        case "dx":
                             switch (third) {
                                 case "ax":
                                     opStream.write(24);
                                     break;
-                                case "cx":
+                                case "bx":
                                     opStream.write(25);
                                     break;
-                                case "dx":
+                                case "cx":
                                     opStream.write(26);
                                     break;
                                 case "[ax]":
                                     opStream.write(27);
                                     break;
-                                default:
+                                case "[bx]":
                                     opStream.write(28);
-                                    if (third.startsWith("\"")) {
-                                        stringsPlaceholder.put(opStream.size(), text);
-                                        opStream.write(new byte[4], 0, 4);
-                                    } else
-                                        opStream.write(toBytes(Integer.parseInt(third)), 0, 4);
-                            }
-                            break;
-                        case "cx":
-                            switch (third) {
-                                case "ax":
+                                    break;
+                                case "[cx]":
                                     opStream.write(29);
                                     break;
-                                case "bx":
+                                case "[dx]":
                                     opStream.write(30);
                                     break;
-                                case "dx":
+                                default:
                                     opStream.write(31);
-                                    break;
-                                case "[ax]":
-                                    opStream.write(32);
-                                    break;
-                                default:
-                                    opStream.write(33);
-                                    if (third.startsWith("\"")) {
-                                        stringsPlaceholder.put(opStream.size(), text);
-                                        opStream.write(new byte[4], 0, 4);
-                                    } else
-                                        opStream.write(toBytes(Integer.parseInt(third)), 0, 4);
-                            }
-                            break;
-                        case "dx":
-                            switch (third) {
-                                case "ax":
-                                    opStream.write(34);
-                                    break;
-                                case "bx":
-                                    opStream.write(35);
-                                    break;
-                                case "cx":
-                                    opStream.write(36);
-                                    break;
-                                case "[ax]":
-                                    opStream.write(37);
-                                    break;
-                                default:
-                                    opStream.write(38);
                                     if (third.startsWith("\"")) {
                                         stringsPlaceholder.put(opStream.size(), text);
                                         opStream.write(new byte[4], 0, 4);
@@ -244,77 +283,155 @@ public class VMCompiler {
                         case "[ax]":
                             switch (third) {
                                 case "ax":
-                                    opStream.write(39);
+                                    opStream.write(32);
                                     break;
                                 case "bx":
-                                    opStream.write(40);
+                                    opStream.write(33);
                                     break;
                                 case "cx":
-                                    opStream.write(41);
+                                    opStream.write(34);
                                     break;
                                 case "dx":
+                                    opStream.write(35);
+                            }
+                            break;
+                        case "[bx]":
+                            switch (third) {
+                                case "ax":
+                                    opStream.write(36);
+                                    break;
+                                case "bx":
+                                    opStream.write(37);
+                                    break;
+                                case "cx":
+                                    opStream.write(38);
+                                    break;
+                                case "dx":
+                                    opStream.write(39);
+                            }
+                            break;
+                        case "[cx]":
+                            switch (third) {
+                                case "ax":
+                                    opStream.write(40);
+                                    break;
+                                case "bx":
+                                    opStream.write(41);
+                                    break;
+                                case "cx":
                                     opStream.write(42);
                                     break;
-                                default:
+                                case "dx":
                                     opStream.write(43);
-                                    if (third.startsWith("\"")) {
-                                        stringsPlaceholder.put(opStream.size(), text);
-                                        opStream.write(new byte[4], 0, 4);
-                                    } else
-                                        opStream.write(toBytes(Integer.parseInt(third)), 0, 4);
+                            }
+                            break;
+                        case "[dx]":
+                            switch (third) {
+                                case "ax":
+                                    opStream.write(44);
+                                    break;
+                                case "bx":
+                                    opStream.write(45);
+                                    break;
+                                case "cx":
+                                    opStream.write(46);
+                                    break;
+                                case "dx":
+                                    opStream.write(47);
                             }
                     }
                     i += 2;
                     break;
                 case "in":
-                    if ("int".equals(next))
-                        opStream.write(44);
-                    else if ("string".equals(next))
-                        opStream.write(45);
-                    i++;
-                    break;
-                case "out":
+                    opStream.write(11);
                     switch (next) {
                         case "char":
-                            opStream.write(46);
+                            opStream.write(0);
                             break;
                         case "int":
-                            opStream.write(47);
+                            opStream.write(1);
                             break;
                         case "string":
-                            opStream.write(48);
+                            opStream.write(2);
                     }
                     i++;
                     break;
-                case "alloc":
-                    opStream.write(49);
+                case "out":
+                    opStream.write(12);
+                    switch (next) {
+                        case "char":
+                            opStream.write(0);
+                            break;
+                        case "int":
+                            opStream.write(1);
+                            break;
+                        case "string":
+                            opStream.write(2);
+                    }
+                    i++;
+                    break;
+                case "mem":
+                    opStream.write(13);
                     break;
                 case "nop":
-                    opStream.write(50);
-                    break;
-                case "add":
-                    opStream.write(51);
-                    break;
-                case "mul":
-                    opStream.write(52);
-                    break;
-                case "div":
-                    opStream.write(53);
-                    break;
-                case "and":
-                    opStream.write(54);
-                    break;
-                case "or":
-                    opStream.write(55);
-                    break;
-                case "xor":
-                    opStream.write(56);
-                    break;
-                case "neg":
-                    opStream.write(57);
+                    opStream.write(14);
                     break;
                 case "cmp":
-                    opStream.write(58);
+                    opStream.write(15);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "add":
+                    opStream.write(16);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "mul":
+                    opStream.write(17);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "div":
+                    opStream.write(18);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "mod":
+                    opStream.write(19);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "and":
+                    opStream.write(20);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "or":
+                    opStream.write(21);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "xor":
+                    opStream.write(22);
+                    writeOperate(opStream, next, third);
+                    i += 2;
+                    break;
+                case "neg":
+                    opStream.write(23);
+                    switch (next) {
+                        case "ax":
+                            opStream.write(0);
+                            break;
+                        case "bx":
+                            opStream.write(1);
+                            break;
+                        case "cx":
+                            opStream.write(2);
+                            break;
+                        case "dx":
+                            opStream.write(3);
+                    }
+                    i++;
                     break;
                 default:
                     if (current.endsWith(":"))
@@ -349,6 +466,70 @@ public class VMCompiler {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Compile Error!");
+        }
+    }
+
+    static void writeOperate(ByteArrayOutputStream opStream, String next, String third) {
+        switch (next) {
+            case "ax":
+                switch (third) {
+                    case "ax":
+                        opStream.write(0);
+                        break;
+                    case "bx":
+                        opStream.write(1);
+                        break;
+                    case "cx":
+                        opStream.write(2);
+                        break;
+                    case "dx":
+                        opStream.write(3);
+                }
+                break;
+            case "bx":
+                switch (third) {
+                    case "ax":
+                        opStream.write(4);
+                        break;
+                    case "bx":
+                        opStream.write(5);
+                        break;
+                    case "cx":
+                        opStream.write(6);
+                        break;
+                    case "dx":
+                        opStream.write(7);
+                }
+                break;
+            case "cx":
+                switch (third) {
+                    case "ax":
+                        opStream.write(8);
+                        break;
+                    case "bx":
+                        opStream.write(9);
+                        break;
+                    case "cx":
+                        opStream.write(10);
+                        break;
+                    case "dx":
+                        opStream.write(11);
+                }
+                break;
+            case "dx":
+                switch (third) {
+                    case "ax":
+                        opStream.write(12);
+                        break;
+                    case "bx":
+                        opStream.write(13);
+                        break;
+                    case "cx":
+                        opStream.write(14);
+                        break;
+                    case "dx":
+                        opStream.write(15);
+                }
         }
     }
 
