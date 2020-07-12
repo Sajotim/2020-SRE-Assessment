@@ -1,0 +1,11 @@
+[Unit]
+Description = tunasync_manger
+After = network.service
+
+[Service]
+Type = simple
+User = root
+ExecStart = /usr/bin/tunasync manager --config /etc/tunasync/manager.conf --with-systemd
+
+[Install]
+WantedBy = multi-user.target
